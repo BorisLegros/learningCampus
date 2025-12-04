@@ -31,3 +31,13 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### docker ###
+docker/mysql-data/
+*backup.sql
+backup/
+dumps/
+
+### ENV ###
+.env
