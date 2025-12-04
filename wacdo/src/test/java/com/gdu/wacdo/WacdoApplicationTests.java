@@ -1,13 +1,13 @@
-package com.gdu.wado;
+package com.gdu.wacdo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WadoApplicationTests {
+class WacdoApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }

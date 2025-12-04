@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import HelloWorldComponent from './components/HelloWorldComponent.vue';
+import RestaurantIndex from "@/components/RestaurantIndex.vue";
 </script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
   <hello-world-component/>
+  <restaurant-index/>
 </template>
 
 <style scoped></style>

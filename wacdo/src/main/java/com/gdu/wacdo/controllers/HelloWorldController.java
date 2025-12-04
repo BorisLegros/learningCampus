@@ -1,4 +1,4 @@
-package com.gdu.wado.controller;
+package com.gdu.wacdo.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-public class HelloController {
+public class HelloWorldController {
     @GetMapping("/helloworld")
     public Map<String, String> helloWorld() {
         Map<String, String> response = new HashMap<>();

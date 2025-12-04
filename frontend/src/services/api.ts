@@ -59,7 +59,13 @@ const api = {
     return fetchApi<string>('/helloworld', {
       method: 'GET',
     });
-  }
+  },
+  async getRestaurant(): Promise<string> {
+    return fetchApi<string>('/restaurant', {
+      method: 'GET',
+    });
+  },
+
 }
 
 export default api
