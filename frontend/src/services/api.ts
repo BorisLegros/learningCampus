@@ -24,11 +24,14 @@ async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise
   };
 
   try {
-    // lancement de la requete
+    // lancement de la requete*
+    // console.log("maisquecepassetil")
     const response = await fetch(url, config);
 
     // verification de la reponse
     if (!response.ok) {
+      // console.log("aaaaaaaaaaaaaaaaa")
+      // console.log(response)
       const errorData = await response.json().catch(() => null);
       throw new ApiError(
         errorData?.message || `Http error: ${response.status}`,
@@ -44,7 +47,7 @@ async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise
     }
 
     // network error
-    console.error('Network Error : ', error);
+    console.error('Network Error :', error);
     throw new ApiError(
       'Connexion to serve fail',
       0,
@@ -55,17 +58,12 @@ async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise
 
 // Service API
 const api = {
-  async getHelloWorld(): Promise<string> {
-    return fetchApi<string>('/helloworld', {
-      method: 'GET',
+  request<T>(endpoint: string, method: string = 'GET', body?: any): Promise<T> {
+    return fetchApi<T>(endpoint, {
+      method,
+      body: body ? JSON.stringify(body) : undefined
     });
-  },
-  async getRestaurant(): Promise<string> {
-    return fetchApi<string>('/restaurant', {
-      method: 'GET',
-    });
-  },
-
+  }
 }
 
 export default api

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <li v-for="item in restaurants">
+  <li v-for="item in restaurants" :key="item.id">
     {{ item.name }}
     {{ item.adress }}
     {{ item.zipcode }}
@@ -24,10 +24,8 @@ const fetchMessage = async (): Promise<void> => {
   loading.value = true;
   error.value = null;
   try {
-    console.log("aaaa")
-    const data = await api.getRestaurant();
+    const data = await api.request<string>('/restaurant', 'GET');
     restaurants.value = data;
-  console.log("eeee")
   console.log(data)
   } catch (err) {
     if (err instanceof ApiError) {
