@@ -1,4 +1,4 @@
-package com.gdu.wacdo.models;
+package com.gdu.wacdo.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
