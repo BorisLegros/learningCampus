@@ -1,6 +1,7 @@
 package com.gdu.wacdo.services;
 
 import com.gdu.wacdo.entities.Fonction;
+import com.gdu.wacdo.generic.AbstractCrudService;
 import com.gdu.wacdo.repositories.FonctionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -10,14 +11,14 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class FonctionService {
-    private final FonctionRepository fonctionRepository;
+public class FonctionService extends AbstractCrudService<Fonction, Long, FonctionRepository> {
 
     public FonctionService(FonctionRepository fonctionRepository) {
-        this.fonctionRepository = fonctionRepository;
+        super(fonctionRepository);
     }
 
-    public Fonction save(Map<String, String> data) {
+    @Override
+    protected Fonction saveData(Map<String, String> data) {
         log.info("nouvelle Fonction : {}", data);
 
         // recuperation
@@ -32,23 +33,6 @@ public class FonctionService {
         Fonction fonction = new Fonction();
         fonction.setLabel(label);
 
-        // enregistrement
-        try {
-            fonction = fonctionRepository.save(fonction);
-            log.info("Nouvelle Fonction sauvegardée : {}", fonction);
-        } catch (Exception e) {
-            log.error("Sauvegarde impossible : {}", e);
-            fonction = null;
-        }
-
         return fonction;
-    }
-
-    public Fonction getById(Long id) {
-        return fonctionRepository.findById(id).orElse(null);
-    }
-
-    public List<Fonction> getAll() {
-        return fonctionRepository.findAll();
     }
 }

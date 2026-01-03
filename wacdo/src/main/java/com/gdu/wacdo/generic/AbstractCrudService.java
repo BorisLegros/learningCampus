@@ -1,4 +1,4 @@
-package com.gdu.wacdo.models;
+package com.gdu.wacdo.generic;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.JpaRepository;

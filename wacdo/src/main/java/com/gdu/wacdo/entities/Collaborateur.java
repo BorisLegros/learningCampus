@@ -1,14 +1,12 @@
 package com.gdu.wacdo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,5 +22,8 @@ public class Collaborateur {
     private Date dateEmbauche;
     private Boolean isAdmin;
     private String password;
+
+    @OneToMany(mappedBy = "collaborateur")
+    private List<Affectation> affectations;
 }
 
