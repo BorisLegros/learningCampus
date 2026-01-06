@@ -1,9 +1,6 @@
 package com.gdu.wacdo.generic;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -23,4 +20,7 @@ public abstract class AbstractCrudController<T, ID, S extends AbstractCrudServic
 
     @PostMapping
     public T add(@RequestBody Map<String, String> data) { return service.save(data); }
+
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable ID id) { return service.deleteById(id); }
 }

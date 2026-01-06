@@ -37,4 +37,9 @@ public abstract class AbstractCrudService <T, ID, R extends JpaRepository<T, ID>
     public List<T> getAll() {
         return repository.findAll();
     }
+
+    public boolean deleteById(ID id) {
+        repository.deleteById(id);
+        return !repository.existsById(id);
+    }
 }

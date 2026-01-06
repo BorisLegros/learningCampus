@@ -1,28 +1,22 @@
 
 <template>
-<!--  <hello-world-component/>-->
-
-
-
-
-
-
+  <hello-world-component/>
 
   <tab-component
-    :tabs="headers">
+    :tabs="tabs">
 
     <template #collab>
-      <collaborateur-index/>
+      <collaborateur-index :headers="collaborateurHeaders"/>
       <collaborateur-create/>
     </template>
 
     <template #fonction>
-      <fonction-index/>
+      <fonction-index :headers="fonctionHeaders"/>
       <fonction-create/>
     </template>
 
     <template #store>
-      <restaurant-index/>
+      <restaurant-index :headers="restaurantHeaders"/>
       <RestaurantCreate/>
     </template>
   </tab-component>
@@ -46,10 +40,29 @@ import FonctionCreate from "@/components/fonction/fonctionCreate.vue";
 import TabComponent from "@/components/generic/TabComponent.vue"
 
 // STATE
-const headers = ref([
+const tabs = ref([
   {title: "Collaborateur", key: "collab"},
   {title: "Fonction", key: "fonction"},
   {title: "Restaurant", key: "store"}
+])
+
+const fonctionHeaders = ref ([
+  {title: "Metier", key: "label"}
+])
+
+const restaurantHeaders = ref ([
+  {title: "Nom", key: "name"},
+  {title: "Adresse", key: "address"},
+  {title: "Code Postal", key: "zipcode"},
+  {title: "Ville", key: "city"}
+])
+
+const collaborateurHeaders = ref ([
+  {title: "Prenom", key: "firstname"},
+  {title: "Nom", key: "lastname"},
+  {title: "Email", key: "email"},
+  {title: "Embauche le", key: "dateEmbauche"},
+  {title: "Admin ?", key: "isAdmin"}
 ])
 </script>
 

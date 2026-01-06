@@ -31,7 +31,6 @@ const index = ref(props.tabs[0])
 
 // METHOD
 const triggerBtnTab = (key: string) => {
-  console.log(key)
   index.value = key
 }
 </script>

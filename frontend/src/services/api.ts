@@ -58,7 +58,7 @@ async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise
 
 // Service API
 const api = {
-  request<T>(endpoint: string, method: string = 'GET', body?: any): Promise<T> {
+  request<T>(endpoint: string, method: string = 'GET', body?: never): Promise<T> {
     return fetchApi<T>(endpoint, {
       method,
       body: body ? JSON.stringify(body) : undefined
