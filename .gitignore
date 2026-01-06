@@ -39,5 +39,3 @@ docker/mysql-data/
 backup/
 dumps/
 
-### ENV ###
-.env
