@@ -1,5 +1,6 @@
 package com.gdu.wacdo.services;
 
+import com.gdu.wacdo.dto.SelectOptionDTO;
 import com.gdu.wacdo.generic.AbstractCrudService;
 import com.gdu.wacdo.entities.Collaborateur;
 import com.gdu.wacdo.repositories.CollaborateurRepository;
@@ -14,8 +15,8 @@ import java.util.Map;
 @Service
 @Slf4j
 public class CollaborateurService extends AbstractCrudService<Collaborateur, Long, CollaborateurRepository> {
-    public CollaborateurService(CollaborateurRepository service) {
-        super(service);
+    public CollaborateurService(CollaborateurRepository repository) {
+        super(repository);
     }
 
     @Override
@@ -45,5 +46,10 @@ public class CollaborateurService extends AbstractCrudService<Collaborateur, Lon
         collaborateur.setPassword(pwd);
 
         return collaborateur;
+    }
+
+    @Override
+    public SelectOptionDTO toSelectOptionDTO(Collaborateur item) {
+        return new SelectOptionDTO(item.getId(), item.getFirstname() + " " + item.getLastname());
     }
 }

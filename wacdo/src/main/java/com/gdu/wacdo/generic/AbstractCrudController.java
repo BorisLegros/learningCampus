@@ -1,5 +1,6 @@
 package com.gdu.wacdo.generic;
 
+import com.gdu.wacdo.dto.SelectOptionDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,4 +24,7 @@ public abstract class AbstractCrudController<T, ID, S extends AbstractCrudServic
 
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable ID id) { return service.deleteById(id); }
+
+    @GetMapping("/selectList")
+    public List<SelectOptionDTO> getSelectList () { return service.getAllForSelect(); }
 }

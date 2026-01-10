@@ -1,8 +1,10 @@
 package com.gdu.wacdo.generic;
 
+import com.gdu.wacdo.dto.SelectOptionDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,4 +44,18 @@ public abstract class AbstractCrudService <T, ID, R extends JpaRepository<T, ID>
         repository.deleteById(id);
         return !repository.existsById(id);
     }
+
+    // use for HTML select options
+    // return [{value: <id>, text: <String>}, ...]
+    public List<SelectOptionDTO> getAllForSelect() {
+        List<SelectOptionDTO> rtn = new ArrayList<>();
+
+        for(T item : this.getAll()) {
+            rtn.add(toSelectOptionDTO(item));
+        }
+
+        return rtn;
+    }
+
+    public abstract SelectOptionDTO toSelectOptionDTO(T item);
 }

@@ -2,7 +2,10 @@
   <form @submit.prevent="handleSubmit">
     <div v-for="field in fields" :key="field.key" class="form-group">
       <label :for="field.key">{{ field.label || field.key }}</label>
-      <input
+      <select v-if="field.type === 'select'">
+        <option v-for="option in field.options" :value=option.value>{{ option.text }}</option>
+      </select>
+      <input v-else
         :id="field.key"
         v-model="formData[field.key]"
         :type="field.type || 'text'"

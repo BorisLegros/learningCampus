@@ -13,14 +13,19 @@
 
     <template #fonction>
       <fonction-index :headers="fonctionHeaders"/>
+          <hr>
       <fonction-create/>
     </template>
 
     <template #store>
       <restaurant-index :headers="restaurantHeaders"/>
-      <RestaurantCreate/>
           <hr>
       <Restaurant-create/>
+    </template>
+
+    <template #affectation>
+      <affectation-create/>
+          <hr>
     </template>
   </tab-component>
 
@@ -38,7 +43,8 @@ import CollaborateurIndex from "@/components/collaborateur/CollaborateurIndex.vu
 import CollaborateurCreate from "@/components/collaborateur/CollaborateurCreate.vue";
 import FonctionIndex from "@/components/fonction/FonctionIndex.vue";
 import FonctionCreate from "@/components/fonction/fonctionCreate.vue";
-
+import AffectationIndex from "@/components/affectation/AffectationIndex.vue";
+import AffectationCreate from "@/components/affectation/AffectationCreate.vue";
 
 import TabComponent from "@/components/generic/TabComponent.vue"
 
@@ -46,7 +52,8 @@ import TabComponent from "@/components/generic/TabComponent.vue"
 const tabs = ref([
   {title: "Collaborateur", key: "collab"},
   {title: "Fonction", key: "fonction"},
-  {title: "Restaurant", key: "store"}
+  {title: "Restaurant", key: "store"},
+  {title: "Affectation", key: "affectation"}
 ])
 
 const fonctionHeaders = ref ([
@@ -66,6 +73,14 @@ const collaborateurHeaders = ref ([
   {title: "Email", key: "email"},
   {title: "Embauche le", key: "dateEmbauche"},
   {title: "Admin ?", key: "isAdmin"}
+])
+
+const affectationHeaders = ref ([
+  {title: "Collaborateur", key: "collaborateur"},
+  {title: "Restaurant", key: "restaurant"},
+  {title: "Poste", key: "poste"},
+  {title: "Date de debut", key: "dateDebut"},
+  {title: "Date de fin", key: "dateFin"}
 ])
 </script>
 
