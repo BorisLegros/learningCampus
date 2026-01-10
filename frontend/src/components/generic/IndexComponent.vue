@@ -11,7 +11,6 @@
         <th @click="deleteRow(item.id)"> x </th>
       </tr>
     </table>
-    <hr>
   </div>
 </template>
 

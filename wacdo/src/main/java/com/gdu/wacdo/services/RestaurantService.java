@@ -1,25 +1,22 @@
 package com.gdu.wacdo.services;
 
+import com.gdu.wacdo.dto.SelectOptionDTO;
 import com.gdu.wacdo.entities.Restaurant;
+import com.gdu.wacdo.generic.AbstractCrudService;
 import com.gdu.wacdo.repositories.RestaurantRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 @Service
 @Slf4j
-public class RestaurantService {
-    private final RestaurantRepository restaurantRepository;
+public class RestaurantService extends AbstractCrudService<Restaurant, Long, RestaurantRepository> {
+    public RestaurantService(RestaurantRepository repository) { super(repository); }
 
-    public RestaurantService(RestaurantRepository restaurantRepository) {
-        this.restaurantRepository = restaurantRepository;
-    }
-
-    public Restaurant save(Map<String, String> data) {
+    @Override
+    public Restaurant saveData(Map<String, String> data) {
         log.info("nouveau Restaurant : {}", data);
-
         // recuperation
         String name = data.get("name");
         String address = data.get("address");
@@ -46,22 +43,11 @@ public class RestaurantService {
         restaurant.setZipcode(Integer.parseInt(zipcode));
         restaurant.setCity(city);
 
-        try {
-            restaurant = restaurantRepository.save(restaurant);
-            log.info("Restaurant enregistré :  {}", restaurant);
-        } catch (Exception e) {
-            log.info("sauvegarde impossible : {}", e);
-            restaurant = null;
-        }
-
         return restaurant;
     }
 
-    public Restaurant getById(Long id) {
-        return restaurantRepository.findById(id).orElse(null);
-    }
-
-    public List<Restaurant> getAll() {
-        return restaurantRepository.findAll();
+    @Override
+    public SelectOptionDTO toSelectOptionDTO(Restaurant item) {
+        return new SelectOptionDTO(item.getId(), item.getName());
     }
 }

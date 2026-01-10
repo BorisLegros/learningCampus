@@ -7,6 +7,7 @@
 
     <template #collab>
       <collaborateur-index :headers="collaborateurHeaders"/>
+          <hr>
       <collaborateur-create/>
     </template>
 
@@ -18,6 +19,8 @@
     <template #store>
       <restaurant-index :headers="restaurantHeaders"/>
       <RestaurantCreate/>
+          <hr>
+      <Restaurant-create/>
     </template>
   </tab-component>
 
