@@ -2,8 +2,8 @@
   <form @submit.prevent="handleSubmit">
     <div v-for="field in fields" :key="field.key" class="form-group">
       <label :for="field.key">{{ field.label || field.key }}</label>
-      <select v-if="field.type === 'select'">
-        <option v-for="option in field.options" :value=option.value>{{ option.text }}</option>
+      <select v-if="field.type === 'select'" v-model="formData[field.key]">
+        <option v-for="option in field.options" :value="option.value">{{ option.text }}</option>
       </select>
       <input v-else
         :id="field.key"
@@ -33,7 +33,7 @@ const props = defineProps({
 // STATE
 const formData = reactive(
   Object.fromEntries(
-    props.fields.map(field => [field, ''])
+    props.fields.map(field => [field.key, ''])
   )
 );
 const error = ref<string | null>(null)

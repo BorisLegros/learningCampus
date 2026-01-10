@@ -2,9 +2,7 @@ package com.gdu.wacdo.entities;
 
 import com.gdu.wacdo.services.CollaborateurService;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
@@ -12,6 +10,8 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"collaborateur", "restaurant", "poste"})
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Affectation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

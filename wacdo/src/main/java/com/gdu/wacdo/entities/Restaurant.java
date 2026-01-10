@@ -1,9 +1,7 @@
 package com.gdu.wacdo.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -11,6 +9,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString(exclude = {"affectations"})
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
