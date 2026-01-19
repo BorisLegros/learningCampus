@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <div class="navbar">
     <button v-for="item in tabs" :key="item.key" @click="triggerBtnTab(item.key)">
       {{ item.title }}
     </button>
@@ -37,4 +37,22 @@ const triggerBtnTab = (key: string) => {
 
 <style scoped>
 
+.navbar {
+  display : flex;
+  //border : solid 1px;
+  justify-content: space-around;
+  gap: 30px;
+  padding: 50px;
+}
+
+.navbar button {
+  flex: 1;
+  border-radius: 10% 10% 100% 100%;
+  height: 35px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.button-bar button:hover {
+  background: #f0f0f0;
+}
 </style>

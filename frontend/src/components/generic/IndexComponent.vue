@@ -1,14 +1,22 @@
 <template>
-  <div>
+  <div class="table_border">
     <table>
       <thead>
         <tr>
-          <th v-for="header in headers" :key="'header_'+header.key" class="header"> <strong> {{ header.title }} </strong></th>
+          <th v-for="header in headers" :key="'header_'+header.key">
+            <div class="header">
+              <strong> {{ header.title }} </strong>
+            </div>
+          </th>
+          <th class="th_cross">   </th>
+        </tr>
+        <tr style="height: 0.7rem;">
+          <th colspan="100" style="border: none; padding: 0;"></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in data" :key="'data_'+item.id" class="line">
-          <td v-for="(value, key) in item" :key="item.id+'_'+key" v-show="containHeader(key)" class="attribute">
+        <tr v-for="item in data" :key="'data_'+item.id">
+          <td v-for="(value, key) in item" :key="item.id+'_'+key" v-show="containHeader(key)">
             {{ value }}
           </td>
           <th @click="deleteRow(item.id)"> x </th>
@@ -94,19 +102,38 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.attribute {
-  margin-right: 3rem;
-  margin-bottom: 5rem;
 
-}
 
 .header {
   border: 1px solid black;
-  padding-inline: 2rem;
+  padding-inline: 1rem;
 }
 
-.line {
-  border: 1px solid black;
-  padding-block: 5rem;
+.th_cross {
+  width: 2rem;
 }
+
+.table_border {
+  border: solid grey 2px;
+  border-radius: 25px;
+  padding: 1rem;
+  width: fit-content;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+thead {
+  border-bottom: 2px solid grey;
+}
+
+td {
+  padding-inline: 1rem;
+}
+
+tbody tr:first-child th {
+  padding-top: 1rem; /* ← Ajustez cette valeur */
+}
+
 </style>
