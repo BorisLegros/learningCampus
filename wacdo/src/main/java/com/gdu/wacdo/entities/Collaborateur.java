@@ -1,5 +1,6 @@
 package com.gdu.wacdo.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,6 +24,7 @@ public class Collaborateur {
     private Boolean isAdmin;
     private String password;
 
+    @JsonManagedReference("collaborateur-affectations")
     @OneToMany(mappedBy = "collaborateur")
     private List<Affectation> affectations;
 }

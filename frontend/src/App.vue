@@ -24,8 +24,9 @@
     </template>
 
     <template #affectation>
-      <affectation-create/>
+      <affectation-index :headers="affectationHeaders"/>
           <hr>
+      <affectation-create/>
     </template>
   </tab-component>
 
@@ -42,7 +43,7 @@ import RestaurantCreate from "@/components/restaurant/RestaurantCreate.vue";
 import CollaborateurIndex from "@/components/collaborateur/CollaborateurIndex.vue";
 import CollaborateurCreate from "@/components/collaborateur/CollaborateurCreate.vue";
 import FonctionIndex from "@/components/fonction/FonctionIndex.vue";
-import FonctionCreate from "@/components/fonction/fonctionCreate.vue";
+import FonctionCreate from "@/components/fonction/FonctionCreate.vue";
 import AffectationIndex from "@/components/affectation/AffectationIndex.vue";
 import AffectationCreate from "@/components/affectation/AffectationCreate.vue";
 

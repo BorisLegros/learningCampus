@@ -1,5 +1,6 @@
 package com.gdu.wacdo.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +18,7 @@ public class Fonction {
     private Long id;
     private String label;
 
+    @JsonManagedReference("poste-affectations")
     @OneToMany(mappedBy = "poste")
     private List<Affectation> affectations;
 }

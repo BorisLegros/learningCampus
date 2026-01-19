@@ -1,5 +1,6 @@
 package com.gdu.wacdo.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,7 @@ public class Restaurant {
     private int zipcode;
     private String city;
 
+    @JsonManagedReference("restaurant-affectations")
     @OneToMany(mappedBy = "restaurant")
     private List<Affectation> affectations;
 }

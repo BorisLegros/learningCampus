@@ -1,15 +1,19 @@
 <template>
   <div>
     <table>
-      <tr>
-        <th v-for="header in headers" :key="'header_'+header.key" class="header"> <strong> {{ header.title }} </strong></th>
-      </tr>
-      <tr v-for="item in data" :key="'data_'+item.id" class="line">
-        <th v-for="(value, key) in item" :key="item.id+'_'+key" v-show="containHeader(key)" class="attribute">
-          {{ value }}
-        </th>
-        <th @click="deleteRow(item.id)"> x </th>
-      </tr>
+      <thead>
+        <tr>
+          <th v-for="header in headers" :key="'header_'+header.key" class="header"> <strong> {{ header.title }} </strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in data" :key="'data_'+item.id" class="line">
+          <td v-for="(value, key) in item" :key="item.id+'_'+key" v-show="containHeader(key)" class="attribute">
+            {{ value }}
+          </td>
+          <th @click="deleteRow(item.id)"> x </th>
+        </tr>
+     </tbody>
     </table>
   </div>
 </template>
@@ -31,8 +35,8 @@ interface iData {
 
 // PROPS
 const props = defineProps<{
-  entity: string,
-  headers: iHead[], // [{title: String, key: String}, ...] key is attribut name
+  readonly entity: string,
+  readonly headers: iHead[], // [{title: String, key: String}, ...] key is attribut name
 }>()
 
 // ATTRIBUTS
