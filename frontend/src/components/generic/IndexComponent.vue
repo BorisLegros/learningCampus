@@ -83,6 +83,8 @@ const fetchData = async (): Promise<void> => {
 
   try {
     data.value = await api.request<string>(props.entity, 'GET');
+
+    console.log(data.value)
   } catch (err) {
     if (err instanceof ApiError) {
       error.value = `Error ${err.status} : ${err.message}`;
