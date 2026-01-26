@@ -17,7 +17,7 @@ const fetchMessage = async (): Promise<void> => {
   loading.value = true;
   error.value = null;
   try {
-    const data = await api.request('/helloworld');
+    const data = await api.request('/public/helloworld');
     message.value = data.message;
   } catch (err) {
     if (err instanceof ApiError) {

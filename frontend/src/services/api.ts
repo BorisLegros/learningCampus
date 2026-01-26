@@ -1,4 +1,6 @@
 // config
+import {getAuthHeader} from "@/services/auth.ts";
+
 const API_BASE_URL = '/api';
 const DEFAULT_HEADERS = {
   'Content-Type': 'application/json'
@@ -19,6 +21,7 @@ async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise
     ...options,
     headers: {
       ...DEFAULT_HEADERS,
+      ...getAuthHeader(),
       ...options.headers,
     },
   };

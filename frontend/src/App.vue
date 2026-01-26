@@ -2,7 +2,12 @@
 <template>
   <hello-world-component/>
 
-  <tab-component
+  <login-component v-if="!isConnected"
+                   @connexion-ok="isConnected = true"
+  />
+
+
+  <tab-component v-else
     :tabs="tabs">
 
     <template #collab>
@@ -48,8 +53,12 @@ import AffectationIndex from "@/components/affectation/AffectationIndex.vue";
 import AffectationCreate from "@/components/affectation/AffectationCreate.vue";
 
 import TabComponent from "@/components/generic/TabComponent.vue"
+import LoginComponent from "@/components/LoginComponent.vue";
 
 // STATE
+const isConnected = ref(false)
+
+
 const tabs = ref([
   {title: "Collaborateur", key: "collab"},
   {title: "Fonction", key: "fonction"},
@@ -77,9 +86,9 @@ const collaborateurHeaders = ref ([
 ])
 
 const affectationHeaders = ref ([
-  {title: "Collaborateur", key: "collaborateur"},
-  {title: "Restaurant", key: "restaurant"},
-  {title: "Poste", key: "poste"},
+  {title: "Collaborateur", key: "collaborateur", subkey: ["lastname", "fistname"]},
+  {title: "Restaurant", key: "restaurant", subkey: ["name"]},
+  {title: "Poste", key: "poste", subkey: ["label"]},
   {title: "Date de debut", key: "dateDebut"},
   {title: "Date de fin", key: "dateFin"}
 ])
