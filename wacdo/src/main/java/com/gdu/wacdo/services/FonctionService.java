@@ -1,9 +1,7 @@
 package com.gdu.wacdo.services;
 
-import com.gdu.wacdo.dto.AffectationDTO;
 import com.gdu.wacdo.dto.FonctionDTO;
 import com.gdu.wacdo.dto.SelectOptionDTO;
-import com.gdu.wacdo.entities.Affectation;
 import com.gdu.wacdo.entities.Fonction;
 import com.gdu.wacdo.generic.AbstractCrudService;
 import com.gdu.wacdo.generic.AbstractIndexDTO;
@@ -29,9 +27,9 @@ public class FonctionService extends AbstractCrudService<Fonction, Long, Fonctio
         String label = data.get("label");
 
         // verification
-        if (label == null || label.trim().isEmpty()) {
-            // return label error
-        }
+//        if (label == null || label.trim().isEmpty()) {
+//            // return label error
+//        }
 
         // construction
         Fonction fonction = new Fonction();

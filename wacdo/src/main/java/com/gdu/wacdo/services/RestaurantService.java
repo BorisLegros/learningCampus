@@ -26,18 +26,18 @@ public class RestaurantService extends AbstractCrudService<Restaurant, Long, Res
         String city = data.get("city");
 
         // verification
-        if (name == null || name.trim().isEmpty()) {
-            // return error name
-        }
-        if (address == null || address.trim().isEmpty()) {
-            // return error adress
-        }
-        if (zipcode == null || zipcode.trim().length() != 5) {
-            //return error zipcode
-        }
-        if (city == null || city.trim().isEmpty()) {
-            // return error city
-        }
+//        if (name == null || name.trim().isEmpty()) {
+//            // return error name
+//        }
+//        if (address == null || address.trim().isEmpty()) {
+//            // return error adress
+//        }
+//        if (zipcode == null || zipcode.trim().length() != 5) {
+//            //return error zipcode
+//        }
+//        if (city == null || city.trim().isEmpty()) {
+//            // return error city
+//        }
 
         Restaurant restaurant = new Restaurant();
         restaurant.setName(name);

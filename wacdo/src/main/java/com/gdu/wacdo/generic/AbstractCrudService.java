@@ -1,8 +1,6 @@
 package com.gdu.wacdo.generic;
 
-import com.gdu.wacdo.dto.AffectationDTO;
 import com.gdu.wacdo.dto.SelectOptionDTO;
-import com.gdu.wacdo.entities.Affectation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -25,7 +23,7 @@ public abstract class AbstractCrudService <T, ID, R extends JpaRepository<T, ID>
             entity = repository.save(entity);
             log.info("Entity saved : {}", entity);
         } catch (Exception e) {
-            log.warn("Save failure : {}", e);
+            log.warn("Save failure : " + e);
             entity = null;
         }
 

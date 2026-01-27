@@ -8,9 +8,7 @@ import com.gdu.wacdo.generic.AbstractIndexDTO;
 import com.gdu.wacdo.repositories.AffectationRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 @Service
