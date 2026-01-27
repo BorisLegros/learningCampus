@@ -1,8 +1,12 @@
 package com.gdu.wacdo.services;
 
+import com.gdu.wacdo.dto.AffectationDTO;
+import com.gdu.wacdo.dto.FonctionDTO;
 import com.gdu.wacdo.dto.SelectOptionDTO;
+import com.gdu.wacdo.entities.Affectation;
 import com.gdu.wacdo.entities.Fonction;
 import com.gdu.wacdo.generic.AbstractCrudService;
+import com.gdu.wacdo.generic.AbstractIndexDTO;
 import com.gdu.wacdo.repositories.FonctionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -39,5 +43,10 @@ public class FonctionService extends AbstractCrudService<Fonction, Long, Fonctio
     @Override
     public SelectOptionDTO toSelectOptionDTO(Fonction item) {
         return new SelectOptionDTO(item.getId(), item.getLabel());
+    }
+
+    @Override
+    public AbstractIndexDTO toIndexDTO(Fonction item) {
+        return new FonctionDTO(item);
     }
 }

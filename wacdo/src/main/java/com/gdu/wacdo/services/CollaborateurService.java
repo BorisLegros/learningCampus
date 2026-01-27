@@ -1,8 +1,10 @@
 package com.gdu.wacdo.services;
 
+import com.gdu.wacdo.dto.CollaborateurDTO;
 import com.gdu.wacdo.dto.SelectOptionDTO;
 import com.gdu.wacdo.generic.AbstractCrudService;
 import com.gdu.wacdo.entities.Collaborateur;
+import com.gdu.wacdo.generic.AbstractIndexDTO;
 import com.gdu.wacdo.repositories.CollaborateurRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
@@ -60,6 +62,11 @@ public class CollaborateurService extends AbstractCrudService<Collaborateur, Lon
     @Override
     public SelectOptionDTO toSelectOptionDTO(Collaborateur item) {
         return new SelectOptionDTO(item.getId(), item.getFirstname() + " " + item.getLastname());
+    }
+
+    @Override
+    public AbstractIndexDTO toIndexDTO(Collaborateur item) {
+        return new CollaborateurDTO(item);
     }
 
     @Override

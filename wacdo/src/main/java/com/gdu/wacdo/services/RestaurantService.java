@@ -1,8 +1,10 @@
 package com.gdu.wacdo.services;
 
+import com.gdu.wacdo.dto.RestaurantDTO;
 import com.gdu.wacdo.dto.SelectOptionDTO;
 import com.gdu.wacdo.entities.Restaurant;
 import com.gdu.wacdo.generic.AbstractCrudService;
+import com.gdu.wacdo.generic.AbstractIndexDTO;
 import com.gdu.wacdo.repositories.RestaurantRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -49,5 +51,10 @@ public class RestaurantService extends AbstractCrudService<Restaurant, Long, Res
     @Override
     public SelectOptionDTO toSelectOptionDTO(Restaurant item) {
         return new SelectOptionDTO(item.getId(), item.getName());
+    }
+
+    @Override
+    public AbstractIndexDTO toIndexDTO(Restaurant item) {
+        return new RestaurantDTO(item);
     }
 }

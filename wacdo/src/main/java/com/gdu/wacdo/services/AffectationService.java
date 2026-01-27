@@ -1,12 +1,16 @@
 package com.gdu.wacdo.services;
 
+import com.gdu.wacdo.dto.AffectationDTO;
 import com.gdu.wacdo.dto.SelectOptionDTO;
 import com.gdu.wacdo.entities.Affectation;
 import com.gdu.wacdo.generic.AbstractCrudService;
+import com.gdu.wacdo.generic.AbstractIndexDTO;
 import com.gdu.wacdo.repositories.AffectationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -47,5 +51,10 @@ public class AffectationService extends AbstractCrudService<Affectation, Long, A
     @Override
     public SelectOptionDTO toSelectOptionDTO(Affectation item) {
         return new SelectOptionDTO(item.getId(), item.getPoste().getLabel());
+    }
+
+    @Override
+    public AbstractIndexDTO toIndexDTO(Affectation item) {
+        return new AffectationDTO(item);
     }
 }

@@ -1,6 +1,8 @@
 package com.gdu.wacdo.generic;
 
+import com.gdu.wacdo.dto.AffectationDTO;
 import com.gdu.wacdo.dto.SelectOptionDTO;
+import com.gdu.wacdo.entities.Affectation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -40,6 +42,17 @@ public abstract class AbstractCrudService <T, ID, R extends JpaRepository<T, ID>
         return repository.findAll();
     }
 
+    public List<AbstractIndexDTO> getAllIndexDTO() {
+        List<T> list = this.getAll();
+        List<AbstractIndexDTO> rtn = new ArrayList<>(list.size());
+
+        for (T item : list) {
+            rtn.add(this.toIndexDTO(item));
+        }
+
+        return rtn;
+    }
+
     public boolean deleteById(ID id) {
         repository.deleteById(id);
         return !repository.existsById(id);
@@ -58,4 +71,5 @@ public abstract class AbstractCrudService <T, ID, R extends JpaRepository<T, ID>
     }
 
     public abstract SelectOptionDTO toSelectOptionDTO(T item);
+    public abstract AbstractIndexDTO toIndexDTO(T item);
 }

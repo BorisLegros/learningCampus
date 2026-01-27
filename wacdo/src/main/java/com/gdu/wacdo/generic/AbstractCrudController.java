@@ -14,7 +14,8 @@ public abstract class AbstractCrudController<T, ID, S extends AbstractCrudServic
     }
 
     @GetMapping
-    public List<T> getAll() { return service.getAll(); }
+    public List<AbstractIndexDTO> getAll() { return service.getAllIndexDTO(); }
+//    public List<T> getAll() { return service.getAll(); }
 
     @GetMapping("/{id}")
     public T get(@PathVariable ID id) { return service.getById(id); }
