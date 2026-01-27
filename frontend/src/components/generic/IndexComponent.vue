@@ -16,9 +16,15 @@
       </thead>
       <tbody>
         <tr v-for="item in data" :key="'data_'+item.id">
-          <td v-for="(value, key) in item" :key="item.id+'_'+key" v-show="containHeader(key)">
-            {{ value }}
+          <td v-for="head in headers" :key="item.id+'_'+head.key">
+            {{item[head.key]}}
           </td>
+
+
+<!--          -->
+<!--          <td v-for="(value, key, idx) in item" :key="item.id+'_'+key" v-show="containHeader(key)">-->
+<!--            {{ idx }}-->
+<!--          </td>-->
           <th @click="deleteRow(item.id)"> x </th>
         </tr>
      </tbody>

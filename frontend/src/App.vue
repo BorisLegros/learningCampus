@@ -86,9 +86,9 @@ const collaborateurHeaders = ref ([
 ])
 
 const affectationHeaders = ref ([
-  {title: "Collaborateur", key: "collaborateur", subkey: ["lastname", "fistname"]},
-  {title: "Restaurant", key: "restaurant", subkey: ["name"]},
-  {title: "Poste", key: "poste", subkey: ["label"]},
+  {title: "Collaborateur", key: "collaborateur"},
+  {title: "Restaurant", key: "restaurant"},
+  {title: "Poste", key: "poste"},
   {title: "Date de debut", key: "dateDebut"},
   {title: "Date de fin", key: "dateFin"}
 ])

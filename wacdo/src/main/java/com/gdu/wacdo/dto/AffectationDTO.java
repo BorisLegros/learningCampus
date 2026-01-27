@@ -22,7 +22,7 @@ public class AffectationDTO extends AbstractIndexDTO {
         this.collaborateur = collab;
         this.restaurant = origin.getRestaurant().getName();
         this.poste = origin.getPoste().getLabel();
-        this.dateDebut = origin.getDateFin();
+        this.dateDebut = origin.getDateDebut();
         this.dateFin = origin.getDateFin();
     }
 }
