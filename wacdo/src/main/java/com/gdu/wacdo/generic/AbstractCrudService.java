@@ -1,8 +1,12 @@
 package com.gdu.wacdo.generic;
 
 import com.gdu.wacdo.dto.SelectOptionDTO;
+import jakarta.persistence.Entity;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +15,27 @@ import java.util.Map;
 @Slf4j
 public abstract class AbstractCrudService <T, ID, R extends JpaRepository<T, ID>> {
     protected final R repository;
+    protected final Class<T> entityClass;
+    protected final String entityName;
 
-    public AbstractCrudService(R repository) {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public AbstractCrudService(Class<T> entityClass, R repository) {
         this.repository = repository;
+        this.entityClass = entityClass;
+        this.entityName = getEntityName(entityClass);
+    }
+
+    private String getEntityName(Class<T> entityClass) {
+        Entity entityAnnotation = entityClass.getAnnotation(Entity.class);
+
+        if (entityAnnotation != null && !entityAnnotation.name().isEmpty()) {
+            return entityAnnotation.name();
+        }
+
+        // Sinon utilise le nom de la classe en lowercase
+        return entityClass.getSimpleName().toLowerCase();
     }
 
     public T save(Map<String, String> data) {
@@ -41,7 +63,10 @@ public abstract class AbstractCrudService <T, ID, R extends JpaRepository<T, ID>
     }
 
     public List<AbstractIndexDTO> getAllIndexDTO() {
-        List<T> list = this.getAll();
+        return this.listToIndexDTO(this.getAll());
+    }
+
+    public List<AbstractIndexDTO> listToIndexDTO (List<T> list) {
         List<AbstractIndexDTO> rtn = new ArrayList<>(list.size());
 
         for (T item : list) {
@@ -66,6 +91,21 @@ public abstract class AbstractCrudService <T, ID, R extends JpaRepository<T, ID>
         }
 
         return rtn;
+    }
+
+    public List<AbstractIndexDTO> getFiltered(Map<String, String> filters) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM " + this.entityName + " WHERE 1=1");
+        List<Object> params = new ArrayList<>();
+
+        filters.forEach((key, value) -> {
+            if (value != null && !value.isEmpty()) {
+                sql.append(" AND LOWER(").append(key).append(") LIKE LOWER(?)");
+                params.add(value + "%");
+            }
+        });
+
+        List<T> listFiltered = jdbcTemplate.query(sql.toString(), new BeanPropertyRowMapper<>(this.entityClass), params.toArray());
+        return this.listToIndexDTO(listFiltered);
     }
 
     public abstract SelectOptionDTO toSelectOptionDTO(T item);

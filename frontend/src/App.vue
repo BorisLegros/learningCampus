@@ -11,27 +11,35 @@
     :tabs="tabs">
 
     <template #collab>
-      <collaborateur-index :headers="collaborateurHeaders"/>
-          <hr>
-      <collaborateur-create/>
+      <div class="index">
+        <collaborateur-index :headers="collaborateurHeaders"/>
+        <collaborateur-create/>
+      </div>
+      <hr/>
     </template>
 
     <template #fonction>
-      <fonction-index :headers="fonctionHeaders"/>
-          <hr>
-      <fonction-create/>
+      <div class="index">
+        <fonction-index :headers="fonctionHeaders"/>
+        <fonction-create/>
+      </div>
+      <hr/>
     </template>
 
     <template #store>
-      <restaurant-index :headers="restaurantHeaders"/>
-          <hr>
-      <Restaurant-create/>
+      <div class="index">
+        <restaurant-index :headers="restaurantHeaders"/>
+        <Restaurant-create/>
+      </div>
+      <hr/>
     </template>
 
     <template #affectation>
-      <affectation-index :headers="affectationHeaders"/>
-          <hr>
-      <affectation-create/>
+      <div class="index">
+        <affectation-index/>
+        <affectation-create/>
+      </div>
+      <hr/>
     </template>
   </tab-component>
 
@@ -85,13 +93,13 @@ const collaborateurHeaders = ref ([
   {title: "Admin ?", key: "isAdmin"}
 ])
 
-const affectationHeaders = ref ([
-  {title: "Collaborateur", key: "collaborateur"},
-  {title: "Restaurant", key: "restaurant"},
-  {title: "Poste", key: "poste"},
-  {title: "Date de debut", key: "dateDebut"},
-  {title: "Date de fin", key: "dateFin"}
-])
 </script>
 
-<style scoped></style>
+<style scoped>
+.index {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+}
+</style>

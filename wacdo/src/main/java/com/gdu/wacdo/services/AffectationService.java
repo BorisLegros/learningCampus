@@ -21,7 +21,7 @@ public class AffectationService extends AbstractCrudService<Affectation, Long, A
                               CollaborateurService collaborateurService,
                               FonctionService fonctionService,
                               RestaurantService restaurantService) {
-        super(repository);
+        super(Affectation.class, repository);
         this.collaborateurService = collaborateurService;
         this.fonctionService = fonctionService;
         this.restaurantService = restaurantService;

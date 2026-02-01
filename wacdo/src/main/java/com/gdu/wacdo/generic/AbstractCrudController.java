@@ -28,4 +28,9 @@ public abstract class AbstractCrudController<T, ID, S extends AbstractCrudServic
 
     @GetMapping("/selectList")
     public List<SelectOptionDTO> getSelectList () { return service.getAllForSelect(); }
+
+    @PostMapping("/filtered")
+    public List<AbstractIndexDTO> getFiltered(@RequestBody Map<String, String> filter) {
+        return service.getFiltered(filter);
+    }
 }

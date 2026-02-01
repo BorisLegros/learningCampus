@@ -6,11 +6,14 @@
     </button>
   </div>
 
-  <div>
-    <slot :name="index"></slot>
-  </div>
-<!--  <slot v-for="item in tabs" :name="item.key" v-if="index === item.key"></slot>-->
+<!--  <div v-for="item in tabs" :key="item.key" v-show="index === item.key">-->
+<!--    <slot :name="item.key"/>-->
+<!--  </div>-->
 
+
+  <div v-for="item in tabs" :key="item.key" >
+    <slot v-if="index === item.key" :name="item.key"/>
+  </div>
 </template>
 
 <script setup lang="ts">

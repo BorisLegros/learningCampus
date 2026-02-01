@@ -64,5 +64,10 @@ const handleSubmit = async (event: Event) => {
 </script>
 
 <style scoped>
-
+form {
+  border: solid grey 2px;
+  border-radius: 25px;
+  padding: 1rem;
+  width: fit-content;
+}
 </style>

@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 @Slf4j
 public class RestaurantService extends AbstractCrudService<Restaurant, Long, RestaurantRepository> {
-    public RestaurantService(RestaurantRepository repository) { super(repository); }
+    public RestaurantService(RestaurantRepository repository) { super(Restaurant.class, repository); }
 
     @Override
     public Restaurant saveData(Map<String, String> data) {

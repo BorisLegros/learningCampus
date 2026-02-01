@@ -27,7 +27,7 @@ public class CollaborateurService extends AbstractCrudService<Collaborateur, Lon
     private PasswordEncoder passwordEncoder;
 
     public CollaborateurService(CollaborateurRepository repository) {
-        super(repository);
+        super(Collaborateur.class, repository);
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.Map;
 public class FonctionService extends AbstractCrudService<Fonction, Long, FonctionRepository> {
 
     public FonctionService(FonctionRepository repository) {
-        super(repository);
+        super(Fonction.class, repository);
     }
 
     @Override

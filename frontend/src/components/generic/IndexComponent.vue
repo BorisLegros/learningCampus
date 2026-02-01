@@ -5,7 +5,7 @@
         <tr>
           <th v-for="header in headers" :key="'header_'+header.key">
             <div class="header">
-              <strong> {{ header.title }} </strong>
+              <input type="text" :placeholder="header.title" v-model="filter[header.key]" />
             </div>
           </th>
           <th class="th_cross">   </th>
@@ -15,16 +15,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in data" :key="'data_'+item.id">
+        <tr v-for="item in data" :key="'data_'+item.id" @click="console.log('rrr')">
           <td v-for="head in headers" :key="item.id+'_'+head.key">
             {{item[head.key]}}
           </td>
-
-
-<!--          -->
-<!--          <td v-for="(value, key, idx) in item" :key="item.id+'_'+key" v-show="containHeader(key)">-->
-<!--            {{ idx }}-->
-<!--          </td>-->
           <th @click="deleteRow(item.id)"> x </th>
         </tr>
      </tbody>
@@ -33,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue"
+import {computed, onMounted, reactive, ref, watch} from "vue"
 import api, {ApiError} from "@/services/api.ts";
 
 //TYPE
@@ -51,16 +45,48 @@ interface iData {
 const props = defineProps<{
   readonly entity: string,
   readonly headers: iHead[], // [{title: String, key: String}, ...] key is attribut name
+  readonly url?: string,
 }>()
+
+// COMPUTE
+const computedUrl = computed(() => props.url ?? props.entity)
 
 // ATTRIBUTS
 const data = ref<string>('');
 const error = ref<string | null>(null);
 const loading = ref<boolean>(false);
 
+const filter = reactive<Record<string, string>>({})
+let debounceTimer : number | null = null
+
 // METHOD
-const containHeader = (key: string) => {
-  return props.headers.some(head => head.key === key)
+watch(filter, () => {
+  if (debounceTimer) clearTimeout(debounceTimer)
+
+  debounceTimer = setTimeout(() => {
+    console.log('Application des filtres avec debounce')
+    fetchFilteredData()
+  }, 500)
+}, { deep: true })
+
+async function fetchFilteredData() {
+  loading.value = true;
+  error.value = null;
+
+  try {
+    data.value = await api.request<string>(computedUrl.value+'/filtered', 'POST', filter);
+
+    console.log(data.value)
+  } catch (err) {
+    if (err instanceof ApiError) {
+      error.value = `Error ${err.status} : ${err.message}`;
+    } else {
+      error.value = 'Unknow error';
+    }
+    console.log(error.value)
+  } finally {
+    loading.value = false;
+  }
 }
 
 const deleteRow = async (id: number) => {
@@ -88,7 +114,7 @@ const fetchData = async (): Promise<void> => {
   error.value = null;
 
   try {
-    data.value = await api.request<string>(props.entity, 'GET');
+    data.value = await api.request<string>(computedUrl.value, 'GET');
 
     console.log(data.value)
   } catch (err) {
@@ -113,7 +139,6 @@ onMounted(() => {
 
 
 .header {
-  border: 1px solid black;
   padding-inline: 1rem;
 }
 
@@ -142,6 +167,10 @@ td {
 
 tbody tr:first-child th {
   padding-top: 1rem; /* ← Ajustez cette valeur */
+}
+
+textarea:focus, input:focus{
+  outline: none;
 }
 
 </style>
