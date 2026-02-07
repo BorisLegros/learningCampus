@@ -110,4 +110,21 @@ public abstract class AbstractCrudService <T, ID, R extends JpaRepository<T, ID>
 
     public abstract SelectOptionDTO toSelectOptionDTO(T item);
     public abstract AbstractIndexDTO toIndexDTO(T item);
+
+
+
+
+//    public interface RestaurantsRepository extends JpaRepository<Restaurant, Long> {
+//
+//        @Query("""
+//       SELECT r FROM Restaurant r
+//       WHERE (:name IS NULL OR LOWER(r.name) LIKE LOWER(CONCAT('%', :name, '%')))
+//         AND (:zipCode IS NULL OR r.zipCode LIKE CONCAT('%', :zipCode, '%'))
+//         AND (:city IS NULL OR LOWER(r.city) LIKE LOWER(CONCAT('%', :city, '%')))
+//   """)
+//        List<Restaurant> searchRestaurants(@Param("name") String name, @Param("zipCode") String zipCode,
+//                                           @Param("city") String city);
+//
+//    }
+
 }
