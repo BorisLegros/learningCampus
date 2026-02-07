@@ -64,9 +64,8 @@ watch(filter, () => {
   if (debounceTimer) clearTimeout(debounceTimer)
 
   debounceTimer = setTimeout(() => {
-    console.log('Application des filtres avec debounce')
     fetchFilteredData()
-  }, 500)
+  }, 150)
 }, { deep: true })
 
 async function fetchFilteredData() {
