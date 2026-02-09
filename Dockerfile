@@ -10,7 +10,7 @@ RUN npm ci
 
 # Copier le code source et builder
 COPY frontend/ ./
-RUN npm run build
+RUN npm run build:prod
 
 # ==========================================
 # Stage 2 : Build Backend (Spring Boot)
