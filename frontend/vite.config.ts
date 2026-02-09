@@ -15,6 +15,11 @@ export default defineConfig({
       '/api': 'http://backend:8080'
     }
   },
+  // Configuration pour la production
+  base: '/',  // Important pour que les assets soient chargés correctement
+  build: {
+    outDir: 'dist',  // Dossier de sortie (utilisé dans le Dockerfile)
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

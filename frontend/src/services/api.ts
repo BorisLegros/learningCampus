@@ -33,8 +33,6 @@ async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise
 
     // verification de la reponse
     if (!response.ok) {
-      // console.log("aaaaaaaaaaaaaaaaa")
-      // console.log(response)
       const errorData = await response.json().catch(() => null);
       throw new ApiError(
         errorData?.message || `Http error: ${response.status}`,
