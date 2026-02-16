@@ -29,6 +29,9 @@
 <script setup lang="ts">
 import {computed, onMounted, reactive, ref, watch} from "vue"
 import api, {ApiError} from "@/services/api.ts";
+import { useRefresh } from '@/components/tool/useRefresh'
+
+const { refreshTrigger } = useRefresh()
 
 //TYPE
 interface iHead {
@@ -131,6 +134,10 @@ const fetchData = async (): Promise<void> => {
 // LIFECYCLE
 onMounted(() => {
   fetchData();
+})
+
+watch(refreshTrigger, () => {
+  fetchData()
 })
 </script>
 

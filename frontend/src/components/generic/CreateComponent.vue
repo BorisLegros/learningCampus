@@ -18,7 +18,11 @@
 <script setup lang="ts">
 import {reactive, ref} from "vue";
 import api, {ApiError} from "@/services/api.ts";
+import { useRefresh } from '@/components/tool/useRefresh'
 
+const { triggerRefresh } = useRefresh()
+
+// PROPS
 const props = defineProps({
   fields: {
     type: Array, // ex: [{ name: 'email', type: 'email', label: 'Email' }]
@@ -50,6 +54,7 @@ const handleSubmit = async (event: Event) => {
 
   try {
     await api.request<string>(props.entity, 'POST', formData)
+    triggerRefresh()
   } catch (err) {
     if (err instanceof ApiError) {
       error.value = `Error ${err.status} : ${err.message}`;
