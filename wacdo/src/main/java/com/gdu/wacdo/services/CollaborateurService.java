@@ -16,18 +16,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Service
 @Slf4j
 public class CollaborateurService extends AbstractCrudService<Collaborateur, Long, CollaborateurRepository> implements UserDetailsService {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public CollaborateurService(CollaborateurRepository repository) {
+    public CollaborateurService(CollaborateurRepository repository, PasswordEncoder passwordEncoder) {
         super(Collaborateur.class, repository);
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override

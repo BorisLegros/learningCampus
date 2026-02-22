@@ -18,7 +18,7 @@ public class Affectation {
     private Long id;
 
     @JsonManagedReference("collaborateur-affectations")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "collaborateur_id")
     private Collaborateur collaborateur;
 

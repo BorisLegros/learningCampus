@@ -1,5 +1,5 @@
 <template>
-  <index-component entity="/restaurant"/>
+  <index-component entity="/restaurant" v-bind="$attrs"/>
 </template>
 
 <script setup lang="ts">

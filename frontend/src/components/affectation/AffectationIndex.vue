@@ -1,5 +1,6 @@
 <template>
 <index-component
+  ref="component"
   entity="/affectation"
   :headers="affectationHeaders"
 />
@@ -17,6 +18,12 @@ const affectationHeaders = ref ([
   {title: "Date de debut", key: "dateDebut"},
   {title: "Date de fin", key: "dateFin"}
 ])
+
+const component = ref(null)
+function handleAddFilter (data: object) {
+  component.value.handleAddFilter({key: "restaurant", value: data.name})
+}
+defineExpose({handleAddFilter})
 </script>
 
 <style scoped>

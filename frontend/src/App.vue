@@ -28,10 +28,13 @@
 
     <template #store>
       <div class="index">
-        <restaurant-index :headers="restaurantHeaders"/>
+        <restaurant-index :headers="restaurantHeaders" @clickRow="handleClickRowRestaurant"/>
         <Restaurant-create/>
       </div>
       <hr/>
+      <div class="index">
+        <affectation-index ref="affectationRestaurant"/>
+      </div>
     </template>
 
     <template #affectation>
@@ -63,9 +66,11 @@ import AffectationCreate from "@/components/affectation/AffectationCreate.vue";
 import TabComponent from "@/components/generic/TabComponent.vue"
 import LoginComponent from "@/components/LoginComponent.vue";
 
+// COMPONENT
+const affectationRestaurant = ref(null)
+
 // STATE
 const isConnected = ref(false)
-
 
 const tabs = ref([
   {title: "Collaborateur", key: "collab"},
@@ -93,6 +98,13 @@ const collaborateurHeaders = ref ([
   {title: "Admin ?", key: "isAdmin"}
 ])
 
+function handleClickRowRestaurant(row: object) {
+
+  console.log(typeof row)
+  console.log(row)
+
+  affectationRestaurant.value.handleAddFilter(row)
+}
 </script>
 
 <style scoped>

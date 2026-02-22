@@ -12,8 +12,4 @@ public class AffectionController extends AbstractCrudController<Affectation, Lon
     public AffectionController(AffectationService service) {
         super(service);
     }
-
-//    @GetMapping
-//    // TODO faire des dto generals
-//    public List<AbstractIndexDTO> getAllDTO() { return service.getAllIndexDTO(); }
 }

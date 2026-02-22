@@ -1,11 +1,13 @@
 package com.gdu.wacdo.generic;
 
 import com.gdu.wacdo.dto.SelectOptionDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public abstract class AbstractCrudController<T, ID, S extends AbstractCrudService<T, ID, ?>> {
     protected final S service;
 
@@ -15,7 +17,6 @@ public abstract class AbstractCrudController<T, ID, S extends AbstractCrudServic
 
     @GetMapping
     public List<AbstractIndexDTO> getAll() { return service.getAllIndexDTO(); }
-//    public List<T> getAll() { return service.getAll(); }
 
     @GetMapping("/{id}")
     public T get(@PathVariable ID id) { return service.getById(id); }

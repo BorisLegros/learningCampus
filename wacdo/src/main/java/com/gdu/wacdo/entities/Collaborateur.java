@@ -25,7 +25,7 @@ public class Collaborateur {
     private String password;
 
     @JsonBackReference("collaborateur-affectations")
-    @OneToMany(mappedBy = "collaborateur")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "collaborateur")
     private List<Affectation> affectations;
 }
 

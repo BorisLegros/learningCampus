@@ -8,14 +8,13 @@
               <input type="text" :placeholder="header.title" v-model="filter[header.key]" />
             </div>
           </th>
-          <th class="th_cross">   </th>
         </tr>
         <tr style="height: 0.7rem;">
           <th colspan="100" style="border: none; padding: 0;"></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in data" :key="'data_'+item.id" @click="console.log('rrr')">
+        <tr v-for="item in data" :key="'data_'+item.id" @click="emits('clickRow', item)">
           <td v-for="head in headers" :key="item.id+'_'+head.key">
             {{item[head.key]}}
           </td>
@@ -27,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, reactive, ref, watch} from "vue"
+import {computed, onMounted, reactive, ref, watch, inject} from "vue"
 import api, {ApiError} from "@/services/api.ts";
 import { useRefresh } from '@/components/tool/useRefresh'
 
@@ -44,12 +43,19 @@ interface iData {
   value: never
 }
 
+// SIGNAL
+const emits = defineEmits([
+  "clickRow"
+])
+
 // PROPS
 const props = defineProps<{
   readonly entity: string,
   readonly headers: iHead[], // [{title: String, key: String}, ...] key is attribut name
   readonly url?: string,
 }>()
+
+const addFilter = inject("addFilter", () => {})
 
 // COMPUTE
 const computedUrl = computed(() => props.url ?? props.entity)
@@ -63,14 +69,6 @@ const filter = reactive<Record<string, string>>({})
 let debounceTimer : number | null = null
 
 // METHOD
-watch(filter, () => {
-  if (debounceTimer) clearTimeout(debounceTimer)
-
-  debounceTimer = setTimeout(() => {
-    fetchFilteredData()
-  }, 150)
-}, { deep: true })
-
 async function fetchFilteredData() {
   loading.value = true;
   error.value = null;
@@ -131,6 +129,12 @@ const fetchData = async (): Promise<void> => {
   }
 }
 
+async function handleAddFilter (data: object) {
+  filter[data.key] = data.value
+}
+
+defineExpose({handleAddFilter})
+
 // LIFECYCLE
 onMounted(() => {
   fetchData();
@@ -139,6 +143,15 @@ onMounted(() => {
 watch(refreshTrigger, () => {
   fetchData()
 })
+
+watch(filter, () => {
+  if (debounceTimer) clearTimeout(debounceTimer)
+
+  debounceTimer = setTimeout(() => {
+    fetchFilteredData()
+  }, 150)
+}, { deep: true })
+
 </script>
 
 <style scoped>

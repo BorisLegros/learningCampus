@@ -2,6 +2,7 @@ package com.gdu.wacdo.services;
 
 import com.gdu.wacdo.dto.FonctionDTO;
 import com.gdu.wacdo.dto.SelectOptionDTO;
+import com.gdu.wacdo.entities.Collaborateur;
 import com.gdu.wacdo.entities.Fonction;
 import com.gdu.wacdo.generic.AbstractCrudService;
 import com.gdu.wacdo.generic.AbstractIndexDTO;
@@ -9,6 +10,7 @@ import com.gdu.wacdo.repositories.FonctionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service

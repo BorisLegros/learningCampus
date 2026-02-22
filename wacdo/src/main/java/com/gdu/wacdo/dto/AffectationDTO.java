@@ -3,10 +3,12 @@ package com.gdu.wacdo.dto;
 import com.gdu.wacdo.entities.Affectation;
 import com.gdu.wacdo.generic.AbstractIndexDTO;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 
 @AllArgsConstructor
+@Slf4j
 public class AffectationDTO extends AbstractIndexDTO {
     public long id;
     public String collaborateur;

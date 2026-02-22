@@ -6,11 +6,12 @@ import com.gdu.wacdo.entities.Affectation;
 import com.gdu.wacdo.generic.AbstractCrudService;
 import com.gdu.wacdo.generic.AbstractIndexDTO;
 import com.gdu.wacdo.repositories.AffectationRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
+@Slf4j
 @Service
 public class AffectationService extends AbstractCrudService<Affectation, Long, AffectationRepository> {
     private final CollaborateurService collaborateurService;
@@ -54,5 +55,16 @@ public class AffectationService extends AbstractCrudService<Affectation, Long, A
     @Override
     public AbstractIndexDTO toIndexDTO(Affectation item) {
         return new AffectationDTO(item);
+    }
+
+    @Override
+    public List<AbstractIndexDTO> getFiltered(Map<String, String> filters) {
+        List <Affectation> list = new ArrayList<>();
+
+        if (filters.keySet().contains("restaurant")) {
+            list = repository.findAllByRestaurantInAndDateFinIsNull(restaurantService.getIdByName(filters.get("restaurant")));
+        }
+
+        return listToIndexDTO(list);
     }
 }
