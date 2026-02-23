@@ -32,7 +32,7 @@
         <Restaurant-create/>
       </div>
       <hr/>
-      <div class="index">
+      <div v-show="isRestaurantClicked" class="index">
         <affectation-index ref="affectationRestaurant"/>
       </div>
     </template>
@@ -71,6 +71,7 @@ const affectationRestaurant = ref(null)
 
 // STATE
 const isConnected = ref(false)
+const isRestaurantClicked = ref(false)
 
 const tabs = ref([
   {title: "Collaborateur", key: "collab"},
@@ -99,11 +100,8 @@ const collaborateurHeaders = ref ([
 ])
 
 function handleClickRowRestaurant(row: object) {
-
-  console.log(typeof row)
-  console.log(row)
-
   affectationRestaurant.value.handleAddFilter(row)
+  isRestaurantClicked.value = true
 }
 </script>
 
